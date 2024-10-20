@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <cuda_runtime_api.h>
-#include <iostream>
-#include <math.h>
 #include <sys/time.h>
 
-#define SIZE 10000
+#define SIZE 100
 #define BLOCKSIZE 256
 
 double get_clock() {
