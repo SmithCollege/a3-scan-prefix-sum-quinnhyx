@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-#define SIZE 100
+#define SIZE 10000
 #define BLOCKSIZE 256
 
 double get_clock() {
@@ -44,23 +44,22 @@ int main() {
     // Copy input data from host to device
     cudaMemcpy(d_input, h_input, sizeof(int) * SIZE, cudaMemcpyHostToDevice);
 
-    // Launch the scan kernel with threads (1 block)
+    double t0,t1;
+    t0=get_clock();
     int numSize = (SIZE + BLOCKSIZE-1)/BLOCKSIZE;
     naive_scan<<<numSize, BLOCKSIZE>>>(d_input, d_output);
-
+    t1=get_clock();
+    
     // Copy output data back to host
     cudaMemcpy(h_output, d_output, sizeof(int) * SIZE, cudaMemcpyDeviceToHost);
 
-    double t0, t1;
-    t0 = get_clock();
     // Print the results
     for (int i = 0; i < SIZE; i++) {
         printf("%d ", h_output[i]);
     }
     printf("\n");
 
-    t1 = get_clock();
-    printf("time per call: %f ns\n", (1000000000.0*(t1-t0)/SIZE));
+    printf("time per call: %f ns\n", (1000000000.0*(t1-t0)));
     
     // Free device memory
     cudaFree(d_input);

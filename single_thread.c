@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-#define SIZE 100
+#define SIZE 1000000
 double get_clock() {
  struct timeval tv; int ok;
  ok = gettimeofday(&tv, (void *) 0);
@@ -21,23 +21,20 @@ int main() {
    }
 
   // do the scan
-  for (int i = 0; i < SIZE; i++) {
-   int value = 0;
-   for (int j = 0; j <= i; j++) {
-     value += input[j];
-   }
-    output[i] = value;
-  }
-
   double t0,t1;
-  t0 = get_clock();
-  // check results
+  t0=get_clock();
+  output[0]=input[0];
+  for (int i = 1; i < SIZE; i++) {
+    output[i] = output[i-1]+input[i];
+  }
+  t1=get_clock();
+   // check results
   for (int i = 0; i < SIZE; i++) {
     printf("%d ", output[i]);
   }
   printf("\n");
-  t1=get_clock();
-  printf("time per call: %f ns\n", (1000000000.0*(t1-t0)/SIZE) );
+  
+  printf("time per call: %f ns\n", (1000000000.0*(t1-t0)) );
 
   // free mem
   free(input);
