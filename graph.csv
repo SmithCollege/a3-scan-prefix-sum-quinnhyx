@@ -1,0 +1,16 @@
+﻿algo,size,time/ns
+single_thread,100,953.674316
+single_thread,1000,4053.115845
+single_thread,10000,70810.31799
+single_thread,100000,391006.4697
+single_thread,1000000,3548860.55
+naïve,100,152111.0535
+naïve,1000,231981.2775
+naïve,10000,367164.6118
+naïve,100000,25197982.79
+naïve,1000000,2003268003
+recursive_doubling,100,128030.777
+recursive_doubling,1000,136137.0087
+recursive_doubling,10000,169038.7726
+recursive_doubling,100000,181913.3759
+recursive_doubling,1000000,856161.1176
