@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-#define SIZE 10000
+#define SIZE 1000000
 #define BLOCKSIZE 256
 
 double get_clock() {
@@ -48,6 +48,7 @@ int main() {
     t0=get_clock();
     int numSize = (SIZE + BLOCKSIZE-1)/BLOCKSIZE;
     naive_scan<<<numSize, BLOCKSIZE>>>(d_input, d_output);
+    cudaDeviceSynchronize();
     t1=get_clock();
     
     // Copy output data back to host

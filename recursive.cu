@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-#define SIZE 1000000
+#define SIZE 100
 #define BLOCKSIZE 256
 
 double get_clock() {
@@ -52,6 +52,7 @@ int main(void) {
         d_output = d_input;
         d_input = temp;
     }
+    cudaDeviceSynchronize();
     t1=get_clock();
     
     // Copy output data back to host
