@@ -1,0 +1,26 @@
+---
+title: "scaling data"
+format: html
+editor: visual
+---
+
+```{r, include = FALSE}
+library(tidyverse)
+library(tidyr)
+
+graph<- read.csv("graph.csv")
+```
+
+```{r}
+graph$size <- as.factor(graph$size)
+
+ggplot(graph, aes(x = size,
+                  y = log(time.ns),
+                  color = algo))+
+  geom_point()+
+  geom_line(linewidth = 1, aes(group = algo))+
+  labs(title = "Time difference between 3 different algorithm",
+       x = "Array size",
+       y = "log(Time/ns)")+
+  scale_x_discrete(labels = c("100", "1000", "10000","100000","1000000"))
+```
